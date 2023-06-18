@@ -2,7 +2,7 @@ use std::fs;
 
 const START_TAG_OPEN_SYMBOL: &str = "<";
 const END_TAG_OPEN_SYMBOL: &str = "</";
-const END_TAG_CLOSE_SYMBOL: &str = ">";
+const TAG_CLOSE_SYMBOL: &str = ">";
 
 struct WebsiteInfoForScraping {
     part_of_attribute_to_search: String,
@@ -59,7 +59,7 @@ async fn main() {
                 if find_summary_tag_start.is_some() && find_summary_tag_end.is_some() {
                     response = response[find_summary_tag_start.unwrap()..response.len()].to_string();
 
-                    let find_end_first_tag_symbol = response.find(END_TAG_CLOSE_SYMBOL);
+                    let find_end_first_tag_symbol = response.find(TAG_CLOSE_SYMBOL);
                     let find_start_last_tag_symbol = response.find(END_TAG_OPEN_SYMBOL);
 
                     if find_end_first_tag_symbol.is_some() && find_start_last_tag_symbol.is_some() {
